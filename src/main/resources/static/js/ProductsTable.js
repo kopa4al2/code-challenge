@@ -39,7 +39,7 @@ class ProductsTable {
      * @param onDelete callback invoked when deleting a product,
      *        callback params is only product id
      * @param onUpdate callback invoked when updating a product,
-     *        callback params are TODO:
+     *        callback params are productId and object with fields to update
      */
     constructor(tableContainer, onSortChange, onOrder, onDelete, onUpdate) {
         this.container = tableContainer;
@@ -90,7 +90,7 @@ class ProductsTable {
                     const allEditableSelector = $(`.editable-${id}`);
                     // Show tooltip that the user did not update the fields
                     if (!this.didUpdate[id]) {
-                        allEditableSelector.tooltip({ title: 'Click on any of these fields to change them '});
+                        allEditableSelector.tooltip({ title: 'Click on any of these fields to change them ' });
                         allEditableSelector.tooltip('enable');
                         allEditableSelector.tooltip('show');
                         setTimeout(() => {

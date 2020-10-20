@@ -9,16 +9,18 @@ import com.varna.code.challenge.models.response.FailedResponse;
 import com.varna.code.challenge.models.response.SuccessResponse;
 import com.varna.code.challenge.models.view.ProductView;
 import com.varna.code.challenge.services.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 @RestController
 public class ProductController
 {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
+
     private final ProductService productService;
 
     @Autowired
@@ -44,7 +46,9 @@ public class ProductController
                     .status(HttpStatus.BAD_REQUEST)
                     .body(new FailedResponse(e.getMessage()));
         } catch (Exception e) {
-            // TODO: Logger
+            LOGGER.error("Unexpected server error while adding product message: {} stack trace: {}",
+                    e.getMessage(),
+                    e.getStackTrace());
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new FailedResponse("Unexpected error occurred"));
@@ -66,7 +70,9 @@ public class ProductController
         } catch (ProductException e) {
             return ResponseEntity.badRequest().body(new FailedResponse(e.getMessage()));
         } catch (Exception e) {
-            //TODO: Logger
+            LOGGER.error("Unexpected server error while deleting product message: {} stack trace: {}",
+                    e.getMessage(),
+                    e.getStackTrace());
             return ResponseEntity.badRequest().body(new FailedResponse("Unexpected error"));
         }
     }
@@ -86,12 +92,12 @@ public class ProductController
     {
         try {
             return ResponseEntity.ok(new SuccessResponse(productService.updateProduct(productId, editProductModel)));
-        } catch (ProductException e)
-        {
+        } catch (ProductException e) {
             return ResponseEntity.badRequest().body(new FailedResponse(e.getMessage()));
-        }
-        catch (Exception e) {
-            //TODO: Logger
+        } catch (Exception e) {
+            LOGGER.error("Unexpected server error while updating product message: {} stack trace: {}",
+                    e.getMessage(),
+                    e.getStackTrace());
             return ResponseEntity.badRequest().body(new FailedResponse("Unexpected error"));
         }
     }
@@ -106,7 +112,9 @@ public class ProductController
         try {
             return ResponseEntity.ok(new SuccessResponse(productService.getCategories()));
         } catch (Exception e) {
-            // TODO: Logger
+            LOGGER.error("Unexpected server error while listing categories message: {} stack trace: {}",
+                    e.getMessage(),
+                    e.getStackTrace());
             return ResponseEntity.badRequest().body(new FailedResponse("Unexpected error"));
         }
     }
@@ -115,9 +123,10 @@ public class ProductController
      * I later realized i was supposed to create a rest api with the exact end points and responses
      * so this is the implementation of paging and sorting which is not used in my front end
      * but can be accessed by writing the query in the browser url bar
-     * @param page the page to show
-     * @param pageSize the page size
-     * @param orderBy the property to order
+     *
+     * @param page      the page to show
+     * @param pageSize  the page size
+     * @param orderBy   the property to order
      * @param direction the direction to order
      * @return response with products paged and sorted by single field
      */
@@ -135,7 +144,9 @@ public class ProductController
             return ResponseEntity.badRequest().body(
                     new FailedResponse(e.getMessage()));
         } catch (Exception e) {
-            // TODO: Logger
+            LOGGER.error("Unexpected server error when getting product message: {} stack trace: {}",
+                    e.getMessage(),
+                    e.getStackTrace());
             e.printStackTrace();
             return ResponseEntity.badRequest().body(
                     new FailedResponse("Unexpected error occurred"));
@@ -153,7 +164,9 @@ public class ProductController
                     new SuccessResponse(
                             productService.getProductCount()));
         } catch (Exception e) {
-            // TODO: Logger
+            LOGGER.error("Unexpected server error when getting product count message: {} stack trace: {}",
+                    e.getMessage(),
+                    e.getStackTrace());
             e.printStackTrace();
             return ResponseEntity.badRequest().body(
                     new FailedResponse("Unexpected error occurred"));
@@ -178,7 +191,9 @@ public class ProductController
             return ResponseEntity.badRequest().body(
                     new FailedResponse(e.getMessage()));
         } catch (Exception e) {
-            // TODO: Logger
+            LOGGER.error("Unexpected server error when getting product message: {} stack trace: {}",
+                    e.getMessage(),
+                    e.getStackTrace());
             e.printStackTrace();
             return ResponseEntity.badRequest().body(
                     new FailedResponse("Unexpected error occurred"));
@@ -205,7 +220,9 @@ public class ProductController
             return ResponseEntity.badRequest().body(
                     new FailedResponse(e.getMessage()));
         } catch (Exception e) {
-            // TODO: Logger
+            LOGGER.error("Unexpected server error when getting product message: {} stack trace: {}",
+                    e.getMessage(),
+                    e.getStackTrace());
             e.printStackTrace();
             return ResponseEntity.badRequest().body(
                     new FailedResponse("Unexpected error occurred"));
@@ -230,7 +247,12 @@ public class ProductController
             return ResponseEntity.badRequest().body(
                     new FailedResponse(e.getMessage()));
         } catch (Exception e) {
-            // TODO: Logger
+            LOGGER.error("Unexpected server error when ordering product with id: {}, amount: {}," +
+                            " message: {} stack trace: {}",
+                    id,
+                    amount,
+                    e.getMessage(),
+                    e.getStackTrace());
             e.printStackTrace();
             return ResponseEntity.badRequest().body(
                     new FailedResponse("Unexpected error occurred"));
