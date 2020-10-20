@@ -9,7 +9,6 @@ import com.varna.code.challenge.models.view.ProductByPage;
 import com.varna.code.challenge.models.view.ProductView;
 import com.varna.code.challenge.models.view.ProductsByCategory;
 import com.varna.code.challenge.repositories.ProductRepository;
-import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;

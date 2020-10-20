@@ -51,9 +51,9 @@ public interface ProductService
      * @param orderDirection the order direction
      * @return List of products for page and sort and total products
      * @throws IllegalArgumentException if orderBy is present by direction is not,
-     *                          if invalid direction is passed
-     *                          if invalid page number or page size is given
-     *                          if there is no field 'orderBy' in products table
+     *                                  if invalid direction is passed
+     *                                  if invalid page number or page size is given
+     *                                  if there is no field 'orderBy' in products table
      */
     ProductByPage getProducts(int pageNumber, int pageSize, @Nullable String orderBy, @Nullable String orderDirection)
             throws IllegalArgumentException;
@@ -87,9 +87,9 @@ public interface ProductService
      *
      * @param amount    the amount
      * @param productId the id of the product
+     * @return the ordered product
      * @throws ProductException if amount is negative, if invalid product id is supplied
      *                          or if the amount is greater than the quantity
-     * @return the ordered product
      */
     ProductView orderProduct(int amount, int productId) throws ProductException;
 

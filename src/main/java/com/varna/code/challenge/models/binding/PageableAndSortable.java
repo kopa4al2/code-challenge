@@ -1,6 +1,5 @@
 package com.varna.code.challenge.models.binding;
 
-import javax.swing.*;
 import java.util.Map;
 
 public class PageableAndSortable

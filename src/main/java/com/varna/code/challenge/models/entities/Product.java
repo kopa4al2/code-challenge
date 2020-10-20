@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class Product
 {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "name")
@@ -41,6 +41,7 @@ public class Product
     /**
      * Constructor used when creating new product entity from
      * front end binding model
+     *
      * @param binding the model from front end
      */
     public Product(ProductBinding binding)

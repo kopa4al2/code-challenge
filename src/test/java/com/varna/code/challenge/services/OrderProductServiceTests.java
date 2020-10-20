@@ -1,15 +1,10 @@
 package com.varna.code.challenge.services;
 
 import com.varna.code.challenge.exceptions.ProductException;
-import com.varna.code.challenge.models.binding.EditProductBinding;
 import com.varna.code.challenge.models.entities.Product;
 import com.varna.code.challenge.models.view.ProductView;
-import com.varna.code.challenge.repositories.ProductRepository;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -17,7 +12,6 @@ import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 public class OrderProductServiceTests extends AbstractProductServiceTests

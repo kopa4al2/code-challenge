@@ -6,3 +6,6 @@
 5. Set your db credentials (there are placeholders there)
 6. in terminal mvn spring-boot:run
 7. server runs at port 8080 (default tomcat's)
+
+Tested with Java 14 (but should run with 9+), 
+latest Chrome and latest Firefox 

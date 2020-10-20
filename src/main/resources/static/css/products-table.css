@@ -1,7 +1,3 @@
-.all-products-container {
-
-}
-
 .products-grid {
     display: grid;
     width: max-content;
@@ -34,8 +30,9 @@
 }
 
 .actions-cell {
-    justify-content: space-around!important;
+    justify-content: space-around !important;
 }
+
 .header-cell.DESC svg {
     display: block;
     transform: rotateZ(180deg);

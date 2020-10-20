@@ -45,7 +45,7 @@ function updatePages() {
     fetch(PRODUCTS_COUNT_URL)
         .then(res => res.json())
         .then(({ body }) => {
-          pagination.setTotalPages(body);
+            pagination.setTotalPages(body);
         })
 }
 

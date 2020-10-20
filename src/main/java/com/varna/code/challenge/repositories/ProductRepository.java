@@ -2,8 +2,6 @@ package com.varna.code.challenge.repositories;
 
 import com.varna.code.challenge.models.entities.Product;
 import com.varna.code.challenge.models.view.ProductsByCategory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 

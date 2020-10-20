@@ -1,4 +1,3 @@
-
 const NOTIFICATION_TYPES = {
     PRIMARY: "primary",
     SUCCESS: "success",

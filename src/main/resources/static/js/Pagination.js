@@ -103,7 +103,7 @@ class Pagination {
 
         pageLink.classList.add('page-link');
         pageLink.textContent = textContent;
-        pageLink.addEventListener('click', e => {
+        pageLink.addEventListener('click', () => {
             // Remove active class from all pageItem items
             // and add active one to the clicked one
             document.querySelectorAll(`.page-item`).forEach(el => el.classList.remove('active'));

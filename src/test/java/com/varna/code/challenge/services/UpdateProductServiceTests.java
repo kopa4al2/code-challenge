@@ -2,7 +2,6 @@ package com.varna.code.challenge.services;
 
 import com.varna.code.challenge.exceptions.ProductException;
 import com.varna.code.challenge.models.binding.EditProductBinding;
-import com.varna.code.challenge.models.binding.ProductBinding;
 import com.varna.code.challenge.models.entities.Product;
 import com.varna.code.challenge.models.view.ProductView;
 import org.junit.jupiter.api.Test;

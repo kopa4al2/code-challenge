@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = "com.varna.code.challenge")
 public abstract class AbstractProductServiceTests
 {
-    protected ProductService productService;
+    protected final ProductService productService;
 
     @Mock
     protected ProductRepository productRepository;

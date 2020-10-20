@@ -1,31 +1,3 @@
-/*
- * Override bootstraps colors with material dark theme ones
-*/
-/*:root {*/
-/*    --danger: #CF6679 !important;*/
-/*    !*--primary: #BB86FC !important;*!*/
-/*    --secondary: #03DAC6 !important;*/
-/*    --background: #212121;*/
-/*    --onBackground: #FFFFFF;*/
-/*    --onBackgroundMD: rgba(255,255,255, 0.68);*/
-/*    --inputBoxShadow: inset 1000px 1000px 0 rgba(0,0,0, 0.75);*/
-/*}*/
-
-
-/*!*.form-control, .form-control:focus, .form-control:active {*!*/
-/*!*    box-shadow: var(--inputBoxShadow);*!*/
-/*!*    border-color: rgba(0, 0, 0, 0.4);*!*/
-/*!*    color: var(--onBackground);*!*/
-/*!*}*!*/
-
-/*!*.form-control:focus, .form-control:active {*!*/
-/*!*    border-color: var(--primary);*!*/
-/*!*}*!*/
-
-/*!*.form-control::placeholder{*!*/
-/*!*    color: var(--onBackgroundMD);*!*/
-/*!*}*!*/
-
 .notification {
     position: absolute;
     left: 0;

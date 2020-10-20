@@ -72,7 +72,7 @@ class ProductsTable {
         document.querySelectorAll('.header-cell').forEach(header => {
             const { header: headerName } = header.dataset;
             if (headerName === 'Actions') return;
-            header.addEventListener('click', e => {
+            header.addEventListener('click', () => {
                 const currentState = this.headerStates[headerName];
                 const nextState = this.getNextState(currentState);
                 this.headerStates[headerName] = nextState;
@@ -118,7 +118,7 @@ class ProductsTable {
                 } else { // order
                     $("#orderProduct").modal('show');
                     const quantityInput = document.getElementById('amountInput');
-                    const orderListener = e => {
+                    const orderListener = () => {
                         this.onOrder(id, quantityInput.value);
                     };
                     document.getElementById('orderProductsButton').addEventListener('click', orderListener);
