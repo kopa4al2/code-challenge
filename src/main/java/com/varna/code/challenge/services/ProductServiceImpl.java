@@ -11,6 +11,7 @@ import com.varna.code.challenge.models.view.ProductsByCategory;
 import com.varna.code.challenge.repositories.ProductRepository;
 import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mapping.PropertyReferenceException;
@@ -18,7 +19,6 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,7 +39,7 @@ public class ProductServiceImpl implements ProductService
     {
         // Check if we have the correct binding model
         if (productToAdd.getName() == null || productToAdd.getCategory() == null ||
-            productToAdd.getName().isBlank() || productToAdd.getCategory().isBlank())
+                productToAdd.getName().isBlank() || productToAdd.getCategory().isBlank())
             throw new ProductException("Invalid product passed, you need name and category");
 
         // Check if we already have such product and if we do, increase quantity, else insert it with quantity = 1
@@ -53,9 +53,16 @@ public class ProductServiceImpl implements ProductService
             Product insertedProduct = productRepository.save(p);
             return new ProductView(insertedProduct);
         }
-        Product returnProduct = productRepository.save(new Product(productToAdd));
 
-        return new ProductView(returnProduct);
+        try {
+
+            Product returnProduct = productRepository.save(new Product(productToAdd));
+            return new ProductView(returnProduct);
+
+        } catch (DataIntegrityViolationException invalidValues) {
+            // Catch it here so in the controller we catch more generic ProductException and pass the user correct msg
+            throw new ProductException("You inserted too long values, name and category cannot exceed 16 symbols");
+        }
     }
 
     @Override
@@ -80,7 +87,7 @@ public class ProductServiceImpl implements ProductService
 
             try {
                 productRepository.save(p);
-            } catch (DataException invalidValues) {
+            } catch (DataIntegrityViolationException invalidValues) {
                 // Catch it here so in the controller we catch more generic ProductException
                 throw new ProductException("You inserted too long values, name and category cannot exceed 16 symbols");
             }
@@ -95,15 +102,9 @@ public class ProductServiceImpl implements ProductService
         if (pageNumber < 0 || itemsPerPage <= 0)
             throw new ProductException("Page number and items per page should be positive");
 
-        try {
-            return productRepository.findAll(PageRequest.of(pageNumber, itemsPerPage))
-                    .map(ProductView::new)
-                    .stream().collect(Collectors.toList());
-        } catch (Exception e) {
-            // TODO: Remove this bullshit
-            e.printStackTrace();
-        }
-        return new ArrayList<>();
+        return productRepository.findAll(PageRequest.of(pageNumber, itemsPerPage))
+                .map(ProductView::new)
+                .stream().collect(Collectors.toList());
     }
 
     @Override
@@ -118,6 +119,7 @@ public class ProductServiceImpl implements ProductService
         } else if (pageNumber < 0 || pageSize <= 0) {
             throw new IllegalArgumentException("Invalid page number or page size");
         } else if (orderBy == null) { // orderDirection is null if we are here
+            // We only have pageNumber and pageSize
             long totalRecords = productRepository.count();
             List<ProductView> productsForPage = productRepository.findAll(PageRequest.of(pageNumber, pageSize))
                     .map(ProductView::new)
@@ -125,6 +127,7 @@ public class ProductServiceImpl implements ProductService
 
             return new ProductByPage(totalRecords, productsForPage);
         } else {
+            // We have both pageNumber, pageSize and correct sort order and name
             try {
                 Sort.Direction sortDirection = Sort.Direction.valueOf(orderDirection.toUpperCase());
 
@@ -177,7 +180,7 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
-    public void orderProduct(int amount, int productId) throws ProductException
+    public ProductView orderProduct(int amount, int productId) throws ProductException
     {
         // If i want to optimize i would check for negative amount first and then get
         // the product from database, but for me, the code looks cleaner this way
@@ -193,7 +196,7 @@ public class ProductServiceImpl implements ProductService
             Product p = productToOrder.get();
             p.setQuantity(p.getQuantity() - amount);
 
-            productRepository.save(p);
+            return new ProductView(productRepository.save(p));
         }
     }
 

@@ -202,7 +202,7 @@ function attachNewProductEventListener() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(submitData)
             })
-                .then(res => res.json())
+                .then(res => res.json().then(json => res.ok ? json : Promise.reject(json)))
                 .then(({ body }) => {
                     window.showNotification(NOTIFICATION_TYPES.SUCCESS,
                         `successfully inserted ${body.name} in ${body.category}`);

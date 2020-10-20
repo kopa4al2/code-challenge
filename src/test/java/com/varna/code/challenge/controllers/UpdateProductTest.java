@@ -1,5 +1,5 @@
 package com.varna.code.challenge.controllers;
 
-public class UpdateProductTest extends AbstractProductControllerTest
+public class UpdateProductTest extends ProductControllerTests
 {
 }

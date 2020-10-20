@@ -35,6 +35,7 @@ public class Product
     {
         this.dateCreated = LocalDate.now();
         this.lastModifiedDate = LocalDate.now();
+        this.quantity = 1;
     }
 
     /**

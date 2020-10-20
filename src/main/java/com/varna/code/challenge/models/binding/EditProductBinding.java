@@ -16,6 +16,13 @@ public class EditProductBinding
     {
     }
 
+    public EditProductBinding(String name, String category, String description)
+    {
+        this.description = description;
+        this.name = name;
+        this.category = category;
+    }
+
     public String getDescription()
     {
         return description;

@@ -89,8 +89,9 @@ public interface ProductService
      * @param productId the id of the product
      * @throws ProductException if amount is negative, if invalid product id is supplied
      *                          or if the amount is greater than the quantity
+     * @return the ordered product
      */
-    void orderProduct(int amount, int productId) throws ProductException;
+    ProductView orderProduct(int amount, int productId) throws ProductException;
 
     /**
      * @return list of categories and amount of products for each category
