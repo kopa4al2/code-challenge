@@ -1,0 +1,68 @@
+/*
+ * Override bootstraps colors with material dark theme ones
+*/
+/*:root {*/
+/*    --danger: #CF6679 !important;*/
+/*    !*--primary: #BB86FC !important;*!*/
+/*    --secondary: #03DAC6 !important;*/
+/*    --background: #212121;*/
+/*    --onBackground: #FFFFFF;*/
+/*    --onBackgroundMD: rgba(255,255,255, 0.68);*/
+/*    --inputBoxShadow: inset 1000px 1000px 0 rgba(0,0,0, 0.75);*/
+/*}*/
+
+
+/*!*.form-control, .form-control:focus, .form-control:active {*!*/
+/*!*    box-shadow: var(--inputBoxShadow);*!*/
+/*!*    border-color: rgba(0, 0, 0, 0.4);*!*/
+/*!*    color: var(--onBackground);*!*/
+/*!*}*!*/
+
+/*!*.form-control:focus, .form-control:active {*!*/
+/*!*    border-color: var(--primary);*!*/
+/*!*}*!*/
+
+/*!*.form-control::placeholder{*!*/
+/*!*    color: var(--onBackgroundMD);*!*/
+/*!*}*!*/
+
+.notification {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: auto;
+    width: 92%;
+    z-index: 9999;
+}
+
+.main-content {
+    margin-top: 30px;
+    padding: 20px;
+}
+
+/*since i only use tooltip for error messages i override its background color */
+.tooltip-inner {
+    background: var(--danger) !important;
+}
+
+input.error {
+    box-shadow: 0 0 5px 3px var(--danger);
+    /*, var(--inputBoxShadow);*/
+    animation: shake 150ms linear;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    75% {
+        transform: translateX(10px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
